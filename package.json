@@ -1,6 +1,6 @@
 {
-  "name": "ionic-starter",
-  "description": "Start a new ionic project in seconds !",
+  "name": "mlm-ionic",
+  "description": "MLM Ionic POC",
   "version": "0.0.1",
   "dependencies": {
     "gulp": "^3.9.0",
@@ -22,5 +22,7 @@
     "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin",
     "org.apache.cordova.inappbrowser"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }
