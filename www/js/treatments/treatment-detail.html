@@ -1,0 +1,12 @@
+<ion-view title="Treatment Details">
+  <ion-content>
+    <ion-spinner class="hcenter voffset" ng-show="!vm.treatment"></ion-spinner>
+    <div class="list card" ng-show="vm.treatment">
+      <div class="item item-avatar">
+        <img ng-src="{{vm.treatment.avatar}}">
+        <h2>{{vm.treatment.user}}</h2>
+        <p>{{vm.treatment.content}}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

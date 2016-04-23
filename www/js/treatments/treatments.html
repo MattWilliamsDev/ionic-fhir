@@ -1,0 +1,30 @@
+<ion-view title="Treatments">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-close-circled" ng-click="vm.listHideAll()" ng-show="vm.isListShowDelete || vm.isListShowReorder"></button>
+    <button class="button button-icon ion-more" ng-click="vm.showOptions($event)"></button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.refresh()"></ion-refresher>
+    <ion-list show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
+      <ion-item class="item-avatar" ng-repeat="treatment in vm.treatments" item="treatment" ui-sref="app.tabs.treatment({treatmentId: treatment.id})" on-hold="vm.moreOptions(treatment)">
+        <img ng-src="{{treatment.avatar}}">
+        <h2>{{treatment.user}}</h2>
+        <p>{{treatment.content}}</p>
+        <ion-delete-button class="ion-minus-circled" ng-click="vm.listDelete(vm.treatments, treatment)"></ion-delete-button>
+        <ion-option-button class="button-assertive" ng-click="vm.edit(treatment)">Edit</ion-option-button>
+        <ion-option-button class="button-calm" ng-click="vm.share(treatment)">Share</ion-option-button>
+        <ion-reorder-button class="ion-navicon" on-reorder="vm.listReorder(vm.treatments, treatment, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+    <ion-spinner class="hcenter voffset" ng-show="!vm.treatments"></ion-spinner>
+  </ion-content>
+
+  <ion-footer-bar class="item-input-inset" ng-click="vm.writeTwitt()">
+    <label class="item-input-wrapper">
+      <i class="icon ion-chatbubbles placeholder-icon"></i>
+      <input type="text" placeholder="Say something">
+    </label>
+    <button class="button button-clear">Track</button>
+  </ion-footer-bar>
+</ion-view>

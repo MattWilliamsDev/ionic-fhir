@@ -16,7 +16,7 @@
       vm.error = null;
       vm.loading = true;
       AuthSrv.login(credentials).then(function(){
-        $state.go('app.tabs.twitts');
+        $state.go('app.tabs.treatments');
         vm.credentials.password = '';
         vm.error = null;
         vm.loading = false;
