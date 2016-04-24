@@ -82,7 +82,7 @@
         }
 
         function showOptions ( event ) {
-            ui.treatmentsPopover.show( event );
+            //ui.treatmentsPopover.show( event );
         }
 
         function listShowDelete () {

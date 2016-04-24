@@ -2,6 +2,9 @@
     'use strict';
     angular.module( 'app', [ 'ionic', 'ngCordova', 'LocalForageModule', 'angularMoment', 'ionic-timepicker' ] )
         .config( configure )
+        .config( function( $ionicConfigProvider ) {
+            $ionicConfigProvider.navBar.alignTitle('center');
+        })
         .config(function (ionicTimePickerProvider) {
             var timePickerObj = {
             inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
