@@ -18,7 +18,95 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+@import "variables";
+
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@charset "UTF-8";
+
+@import
+    "www/lib/ionic/scss/ionicons/ionicons.scss",
+    "www/lib/ionic/scss/_mixins";
+
+/* Custom colors */
+$light-blue: #12b5ea;
+$dark-blue: #005b85;
+$brand-green: #cccc33;
+
+/* Style overrides */
+$positive                    : $light-blue;
+$calm                        : $dark-blue;
+$assertive                   : $brand-green;
+
+@import
+    "www/lib/ionic/scss/_variables",
+    "www/lib/ionic/scss/_reset",
+    "www/lib/ionic/scss/_scaffolding",
+    "www/lib/ionic/scss/_type",
+    "www/lib/ionic/scss/_action-sheet",
+    "www/lib/ionic/scss/_backdrop",
+    "www/lib/ionic/scss/_bar",
+    "www/lib/ionic/scss/_tabs",
+    "www/lib/ionic/scss/_menu",
+    "www/lib/ionic/scss/_modal",
+    "www/lib/ionic/scss/_popover",
+    "www/lib/ionic/scss/_popup",
+    "www/lib/ionic/scss/_loading",
+    "www/lib/ionic/scss/_items",
+    "www/lib/ionic/scss/_list",
+    "www/lib/ionic/scss/_badge",
+    "www/lib/ionic/scss/_slide-box",
+    "www/lib/ionic/scss/_refresher",
+    "www/lib/ionic/scss/_spinner",
+    "www/lib/ionic/scss/_form",
+    "www/lib/ionic/scss/_checkbox",
+    "www/lib/ionic/scss/_toggle",
+    "www/lib/ionic/scss/_radio",
+    "www/lib/ionic/scss/_range",
+    "www/lib/ionic/scss/_select",
+    "www/lib/ionic/scss/_progress",
+    "www/lib/ionic/scss/_button",
+    "www/lib/ionic/scss/_button-bar",
+    "www/lib/ionic/scss/_grid",
+    "www/lib/ionic/scss/_util",
+    "www/lib/ionic/scss/_platform",
+    "www/lib/ionic/scss/_animations",
+    "www/lib/ionic/scss/_transitions";
+
 @import '_ionic-overrides';
 @import "_common";
+
+// $button-positive-bg:              $positive;
+// $button-positive-text:            #fff;
+// $button-positive-border:          darken($positive, 10%);
+// $button-positive-active-bg:       darken($positive, 10%);
+// $button-positive-active-border:   darken($positive, 10%);
+
+// $button-calm-bg:                  $calm;
+// $button-calm-text:                #fff;
+// $button-calm-border:              darken($calm, 10%);
+// $button-calm-active-bg:           darken($calm, 10%);
+// $button-calm-active-border:       darken($calm, 10%);
+
+// $button-assertive-bg:             $assertive;
+// $button-assertive-text:           #fff;
+// $button-assertive-border:         darken($assertive, 10%);
+// $button-assertive-active-bg:      darken($assertive, 10%);
+// $button-assertive-active-border:  darken($assertive, 10%);
+
+// $bar-positive-bg:                 rgba($button-positive-bg, $bar-transparency);
+// $bar-positive-text:               $button-positive-text;
+// $bar-positive-border:             $button-positive-border;
+// $bar-positive-active-bg:          $button-positive-active-bg;
+// $bar-positive-active-border:      $button-positive-active-border;
+
+// $bar-calm-bg:                     rgba($button-calm-bg, $bar-transparency);
+// $bar-calm-text:                   $button-calm-text;
+// $bar-calm-border:                 $button-calm-border;
+// $bar-calm-active-bg:              $button-calm-active-bg;
+// $bar-calm-active-border:          $button-calm-active-border;
+
+// $bar-assertive-bg:                rgba($button-assertive-bg, $bar-transparency);
+// $bar-assertive-text:              $button-assertive-text;
+// $bar-assertive-border:            $button-assertive-border;
+// $bar-assertive-active-bg:         $button-assertive-active-bg;
+// $bar-assertive-active-border:     $button-assertive-active-border;

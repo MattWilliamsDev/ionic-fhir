@@ -1,11 +1,11 @@
 <ion-view title="Activity Details">
   <ion-content>
     <ion-spinner class="hcenter voffset" ng-show="!vm.activity"></ion-spinner>
-    <div class="list card" ng-show="vm.activity">
-      <div class="item">
-        <h2>{{vm.activity.name}}</h2>
-        <p>{{vm.activity.type}}</p>
-      </div>
+    <div class="row" ng-show="vm.activity">
+        <div class="col">
+            <h2>{{ vm.activity.type }}</h2>
+            <p>{{ vm.activity.description }}</p>
+        </div>
     </div>
     <div class="card" ng-show="vm.activity">
         <div class="item item-divider item-icon-right">
