@@ -5,6 +5,7 @@
             <div class="col">
                 <h2>{{ vm.activity.type }}</h2>
                 <p>{{ vm.activity.description }}</p>
+                <p ng-show="vm.activity.detail.dosage"><small>{{vm.activity.detail.dosage}}</small></p>
             </div>
         </div>
         <div class="card" ng-show="vm.activity">
@@ -19,7 +20,7 @@
                 <div class="list">
                     <ion-checkbox class="item" ng-model="vm.activityTracking.isAdministered">I took my medication</ion-checkbox>
                     <div class="item" ng-click="vm.openTimePicker()" ng-show="vm.activityTracking.isAdministered"> At:
-                        <span style="padding-left: 20px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm:ss a'"></span>
+                        <span style="padding-left: 20px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm a'"></span>
                         <i class="icon ion-clock pull-right" style="font-size: 22pt !important"></i>
                     </div>
                 </div>
@@ -33,7 +34,7 @@
             <div class="item" ng-repeat="historyItem in vm.activityHistory" item="historyItem">
                 <h4>{{ historyItem.date | amUtc | amDateFormat:'MM/DD/YYYY' }}</h4>
                 <p>
-                    {{ historyItem.description }} {{ historyItem.time | amUtc | amDateFormat:'h:mm:ss a' }}
+                    {{ historyItem.description }} {{ historyItem.time | amUtc | amDateFormat:'h:mm a' }}
                 </p>
             </div>
         </div>

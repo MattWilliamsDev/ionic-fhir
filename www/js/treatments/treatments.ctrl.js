@@ -3,7 +3,7 @@
     angular.module( 'app' )
         .controller( 'TreatmentsCtrl', TreatmentsCtrl );
 
-    function TreatmentsCtrl ( $scope, $window, $ionicModal, $ionicPopover, $ionicActionSheet, $log, TreatmentSrv ){
+    function TreatmentsCtrl ( $scope, $window, $ionicModal, $ionicPopover, $ionicScrollDelegate, $ionicActionSheet, $log, TreatmentSrv ){
         var vm = {};
         $scope.vm = vm;
 
@@ -29,6 +29,7 @@
             TreatmentSrv.getAll().then( function ( treatments ) {
                 vm.treatments = treatments;
                 console.log( 'vm - after fetch', vm );
+                $ionicScrollDelegate.resize();
             });
 
             $ionicPopover.fromTemplateUrl( 'js/treatments/partials/treatments-options-popover.html', {

@@ -4,33 +4,28 @@
         <button class="button button-icon ion-more" ng-click="vm.showOptions($event)"></button>
     </ion-nav-buttons>
 
-    <ion-content>
+    <ion-content scroll="true">
+        <h1 style="padding: 16px 16px 0px 16px">Jason Argonaut</h1>
         <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.refresh()"></ion-refresher>-->
         
         <ion-list show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
-            <ion-item ng-repeat="treatment in vm.treatments" item="treatment">
-                <h1>
-                    {{ treatment.subject || 'My Careplan' }}
-                </h1>
-                
+            <ion-item class="card" ng-repeat="treatment in vm.treatments" item="treatment">
                 <ion-list class="card">
                     <ion-item class="item-button-right" ng-repeat="( index, activity ) in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({ treatmentId: treatment.id, activityId: $index })">
                         <h2 class="text-uppercase">
                             {{ activity.type }}
                         </h2>
+                        <i class="icon ion-chevron-right pull-right"></i>
                         <p>
                             {{ activity.description }}
                         </p>
-                        <small>
+                        <small ng-show="activity.detail.scheduledPeriod.start">
                             Scheduled: 
                             <span am-time-ago="activity.detail.scheduledPeriod.start"></span>
                         </small>
-                        <button
-                            class="button button-positive"
-                            ng-click="activityNav( index )"
-                        >
-                            TRACK
-                        </button>
+                        <p ng-show="activity.detail.dosage">
+                            <small>Dosage: <span ng-bind="activity.detail.dosage"></span></small>
+                        </p>
                     </ion-item>
                 </ion-list>
             </ion-item>

@@ -25,31 +25,56 @@
 		    Accept: 'application/json'
 		  }
 		};
-        return $http.get(Config.backendUrl+'/CarePlan?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions).then(function(res){
-		  treatmentData = res.data;
-		  treatmentData = treatmentData.entry.map(function(entry){
-		    var cp = {};
-		    cp.id = entry.resource.id;
-		    cp.patientId = "1";
-		    cp.subject = entry.resource.subject.display;
-		    cp.activity = entry.resource.activity;
-		    cp.activity.map(function(activity){
-			  activity.type = activity.detail.category.text;
-			  var a = moment(new Date(activity.detail.scheduledPeriod.start));
-			  var b = moment(new Date(activity.detail.scheduledPeriod.end));
-			  var duration = b.diff(a, 'minutes');
-			  if (duration > 0) {
-			    activity.description = 'Duration: ' + duration + ' minutes';
-			  } else {
-			    activity.description = activity.detail.code.text;
-			  }
-			  return activity;
-			});
-		    return cp;
-		  });
-          cachedTreatments = treatmentData;
-          return angular.copy(cachedTreatments);
-        });
+        return $q.all([
+            $http.get(Config.backendUrl+'/CarePlan?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions),
+            $http.get(Config.backendUrl+'/MedicationOrder?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions) 
+        ]).then(
+            function( responses ) {
+                var treatmentsResponse = responses[0];
+                var medicationOrdersResponse = responses[1];
+                treatmentData = treatmentsResponse.data;
+                treatmentData = treatmentData.entry.map(function(entry){
+                    var cp = {};
+                    cp.id = entry.resource.id;
+                    cp.patientId = "1";
+                    cp.subject = entry.resource.subject.display;
+                    cp.activity = entry.resource.activity;
+                    cp.activity.map(function(activity){
+                    activity.type = activity.detail.category.text;
+                    var a = moment(new Date(activity.detail.scheduledPeriod.start));
+                    var b = moment(new Date(activity.detail.scheduledPeriod.end));
+                    var duration = b.diff(a, 'minutes');
+                    if (duration > 0) {
+                        activity.description = 'Duration: ' + duration + ' minutes';
+                    } else {
+                        activity.description = activity.detail.code.text;
+                    }
+                    return activity;
+                    });
+                    return cp;
+                });
+                // LOOSE MEDICATIONORDER OBJECTS
+                var looseCPs = medicationOrdersResponse.data.entry.map(function(entry){
+                    var cp = {};
+                    cp.id = "";
+                    cp.patientId = "1";
+                    cp.subject = "Jason Argonaut";
+                    cp.activity = [];
+                    cp.activity.push({
+                        description: entry.resource.medicationReference.display,
+                        type: "Medication",
+                        detail: {
+                            dosage: entry.resource.dosageInstruction ? entry.resource.dosageInstruction[0].text : null
+                        }
+                    });
+                    return cp;
+                });
+                treatmentData = treatmentData.concat(looseCPs);
+                
+                cachedTreatments = treatmentData;
+                return angular.copy(cachedTreatments);
+            }
+        )
       }
     }
 
