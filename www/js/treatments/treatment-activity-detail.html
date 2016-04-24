@@ -13,7 +13,13 @@
             <i class="icon ion-calendar"></i>
         </div>
         <div class="item item-text-wrap">
-            
+            <h3>{{vm.activityTracking.administrationDate | amDateFormat:'dddd, MMMM Do YYYY'}}</h4>
+            <div class="list">
+                <ion-checkbox class="item" ng-model="vm.activityTracking.isAdministered">I took my medication</ion-checkbox>
+                <div class="item" ng-click="vm.openTimePicker()" ng-show="vm.activityTracking.isAdministered"> At:
+                    <span style="padding-left: 24px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm:ss a'"></span>
+                    <i class="icon ion-clock pull-right" style="font-size: 22pt !important"></i></div>
+            </div>
         </div>        
     </div>
     

@@ -1,7 +1,17 @@
 ( function() {
     'use strict';
-    angular.module( 'app', [ 'ionic', 'ngCordova', 'LocalForageModule', 'angularMoment' ] )
+    angular.module( 'app', [ 'ionic', 'ngCordova', 'LocalForageModule', 'angularMoment', 'ionic-timepicker' ] )
         .config( configure )
+        .config(function (ionicTimePickerProvider) {
+            var timePickerObj = {
+            inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
+            format: 12,
+            step: 15,
+            setLabel: 'Set',
+            closeLabel: 'Close'
+            };
+            ionicTimePickerProvider.configTimePicker(timePickerObj);
+        })
         .run( runBlock );
 
     configure.$inject = [ '$urlRouterProvider', '$provide', '$httpProvider' ];
