@@ -1,10 +1,10 @@
 <ion-view title="Activity Details">
-  <ion-content>
+  <ion-content scroll="true" overflow-scroll="true">
     <ion-spinner class="hcenter voffset" ng-show="!vm.activity"></ion-spinner>
     <div class="list card" ng-show="vm.activity">
       <div class="item">
-        <h2>{{vm.activity.name}}</h2>
-        <p>{{vm.activity.type}}</p>
+        <h2>{{vm.activity.description}}</h2>
+        <p style="text-transform: capitalize">{{vm.activity.type}}</p>
       </div>
     </div>
     <div class="card" ng-show="vm.activity">
@@ -17,10 +17,20 @@
             <div class="list">
                 <ion-checkbox class="item" ng-model="vm.activityTracking.isAdministered">I took my medication</ion-checkbox>
                 <div class="item" ng-click="vm.openTimePicker()" ng-show="vm.activityTracking.isAdministered"> At:
-                    <span style="padding-left: 24px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm:ss a'"></span>
+                    <span style="padding-left: 20px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm:ss a'"></span>
                     <i class="icon ion-clock pull-right" style="font-size: 22pt !important"></i></div>
             </div>
         </div>        
+    </div>
+    <div class="list card" ng-show="vm.activity">
+      <div class="item item-divider item-icon-right">
+          History
+          <i class="icon ion-history"></i>
+      </div>
+      <div class="item" ng-repeat="historyItem in vm.activityHistory" item="historyItem">
+        <h4>{{historyItem.date | amUtc | amDateFormat:'MM/DD/YYYY'}}</h4>
+        <p>{{historyItem.description}} {{historyItem.time | amUtc | amDateFormat:'h:mm:ss a'}} </p>
+      </div>
     </div>
     
   </ion-content>
