@@ -11,10 +11,6 @@
     activate();
 
     function activate () {
-      // /!\ To use this, you should add Push plugin : ionic plugin add https://github.com/phonegap-build/PushPlugin
-      PushPlugin.onNotification( function ( notification ) {
-        vm.notifCount++;
-      });
     }
   }
 })();
