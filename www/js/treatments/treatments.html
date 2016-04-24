@@ -5,31 +5,35 @@
     </ion-nav-buttons>
 
     <ion-content scroll="true">
-        <h1 style="padding: 16px 16px 0px 16px">Jason Argonaut</h1>
         <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.refresh()"></ion-refresher>-->
+        <h1 class="page-header">Jason Argonaut</h1>
         
-        <ion-list show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
-            <ion-item class="card" ng-repeat="treatment in vm.treatments" item="treatment">
-                <ion-list class="card">
-                    <ion-item class="item-button-right" ng-repeat="( index, activity ) in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({ treatmentId: treatment.id, activityId: $index })">
-                        <h2 class="text-uppercase">
-                            {{ activity.type }}
-                        </h2>
-                        <i class="icon ion-chevron-right pull-right"></i>
-                        <p>
-                            {{ activity.description }}
-                        </p>
-                        <small ng-show="activity.detail.scheduledPeriod.start">
-                            Scheduled: 
-                            <span am-time-ago="activity.detail.scheduledPeriod.start"></span>
-                        </small>
-                        <p ng-show="activity.detail.dosage">
-                            <small>Dosage: <span ng-bind="activity.detail.dosage"></span></small>
-                        </p>
-                    </ion-item>
-                </ion-list>
-            </ion-item>
-        </ion-list>
+        <div class="card"
+            ng-repeat="treatment in vm.treatments"
+            item="treatment"
+        >
+            <ion-list
+                show-delete="vm.isListShowDelete"
+                show-reorder="vm.isListShowReorder"
+            >
+                <ion-item class="item-icon-right" ng-repeat="( index, activity ) in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({ treatmentId: treatment.id, activityId: $index })">
+                    <h2 class="text-uppercase">
+                        {{ activity.type }}
+                    </h2>
+                    <i class="icon ion-chevron-right"></i>
+                    <p>
+                        {{ activity.description }}
+                    </p>
+                    <small ng-show="activity.detail.scheduledPeriod.start">
+                        Scheduled: 
+                        <span am-time-ago="activity.detail.scheduledPeriod.start"></span>
+                    </small>
+                    <p ng-show="activity.detail.dosage">
+                        <small>Dosage: <span ng-bind="activity.detail.dosage"></span></small>
+                    </p>
+                </ion-item>
+            </ion-list>
+        </div>
 
         <ion-spinner class="hcenter voffset" ng-show="!vm.treatments"></ion-spinner>
     </ion-content>
