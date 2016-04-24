@@ -1,6 +1,6 @@
 ( function() {
     'use strict';
-    angular.module( 'app', [ 'ionic', 'ngCordova', 'LocalForageModule' ] )
+    angular.module( 'app', [ 'ionic', 'ngCordova', 'LocalForageModule', 'angularMoment' ] )
         .config( configure )
         .run( runBlock );
 
@@ -20,9 +20,10 @@
         $httpProvider.interceptors.push( 'AuthInterceptor' );
     }
 
-    function runBlock( $rootScope, $state, $log, AuthSrv, UserSrv, PushPlugin, ToastPlugin, Config ){
+    function runBlock( $rootScope, $state, $log, AuthSrv, UserSrv, PushPlugin, ToastPlugin, Config, amMoment ){
         checkRouteRights();
         setupPushNotifications();
+        amMoment.changeLocale( 'en-US' );
 
         ////////////////
 

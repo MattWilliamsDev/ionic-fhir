@@ -1,28 +1,41 @@
 <ion-view title="Treatments">
-  <ion-nav-buttons side="right">
-    <button class="button button-icon ion-close-circled" ng-click="vm.listHideAll()" ng-show="vm.isListShowDelete || vm.isListShowReorder"></button>
-    <button class="button button-icon ion-more" ng-click="vm.showOptions($event)"></button>
-  </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-close-circled" ng-click="vm.listHideAll()" ng-show="vm.isListShowDelete || vm.isListShowReorder"></button>
+        <button class="button button-icon ion-more" ng-click="vm.showOptions($event)"></button>
+    </ion-nav-buttons>
 
-  <ion-content>
-    <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.refresh()"></ion-refresher>-->
-    <ion-list show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
-      <ion-item class="item" ng-repeat="treatment in vm.treatments" item="treatment">
-          <h1>{{treatment.careplan}}</h1>
-        <ion-list type="card" show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
-          <ion-item class="item item-button-right" ng-repeat="activity in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({treatmentId: treatment.id, activityId: $index})">
-            
-            <h2 style="text-transform: capitalize">{{activity.type}}</h2>
-            <h4>{{activity.name}}</h2>
-            <p>{{activity.description}}</p>
-            <button class="button button-positive">TRACK</button>
-          </ion-item>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.refresh()"></ion-refresher>
+        
+        <ion-list show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
+            <ion-item ng-repeat="treatment in vm.treatments" item="treatment">
+                <h1>
+                    {{ treatment.subject || 'My Careplan' }}
+                </h1>
+                
+                <ion-list class="card" ui-sref="app.tabs.treatments.details({ treatmentId: treatment.id })">
+                    <ion-item class="item-button-right" ng-repeat="( index, activity ) in treatment.activity" item="activity">
+                        <h2 class="text-uppercase">
+                            {{ activity.type }}
+                        </h2>
+                        <p>
+                            {{ activity.description }}
+                        </p>
+                        <small>
+                            Scheduled: 
+                            <span am-time-ago="activity.detail.scheduledPeriod.start"></span>
+                        </small>
+                        <button
+                            class="button button-positive"
+                            ng-click="activityNav( index )"
+                        >
+                            TRACK
+                        </button>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
         </ion-list>
-      </ion-item>
-    </ion-list>
-    <ion-spinner class="hcenter voffset" ng-show="!vm.treatments"></ion-spinner>
-  </ion-content>
 
-  <ion-footer-bar class="item-input-inset" ng-click="vm.writeTwitt()">
-  </ion-footer-bar>
+        <ion-spinner class="hcenter voffset" ng-show="!vm.treatments"></ion-spinner>
+    </ion-content>
 </ion-view>
