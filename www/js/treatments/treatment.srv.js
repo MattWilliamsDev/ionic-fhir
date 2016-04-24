@@ -6,6 +6,7 @@
   // This is a dummy service to use in demo...
   TreatmentSrv.$inject = ['$http', '$q', '$timeout', 'Utils', 'Config', '_'];
   function TreatmentSrv($http, $q, $timeout, Utils, Config, _){
+    var treatmentData = undefined;
     var cachedTreatments = undefined;
     var service = {
       getAll: getAll,
@@ -19,8 +20,34 @@
         cachedTreatments.unshift(createRandomTreatment());
         return $q.when(angular.copy(cachedTreatments));
       } else {
-        return $http.get(Config.backendUrl+'/treatments.json').then(function(res){
-          cachedTreatments = res.data;
+	    var requestOptions = {
+		  headers: {
+		    Accept: 'application/json'
+		  }
+		};
+        return $http.get(Config.backendUrl+'/CarePlan?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions).then(function(res){
+		  treatmentData = res.data;
+		  treatmentData = treatmentData.entry.map(function(entry){
+		    var cp = {};
+		    cp.id = entry.resource.id;
+		    cp.patientId = "1";
+		    cp.subject = entry.resource.subject.display;
+		    cp.activity = entry.resource.activity;
+		    cp.activity.map(function(activity){
+			  activity.type = activity.detail.category.text;
+			  var a = moment(new Date(activity.detail.scheduledPeriod.start));
+			  var b = moment(new Date(activity.detail.scheduledPeriod.end));
+			  var duration = b.diff(a, 'minutes');
+			  if (duration > 0) {
+			    activity.description = 'Duration: ' + duration + ' minutes';
+			  } else {
+			    activity.description = activity.detail.code.text;
+			  }
+			  return activity;
+			});
+		    return cp;
+		  });
+          cachedTreatments = treatmentData;
           return angular.copy(cachedTreatments);
         });
       }

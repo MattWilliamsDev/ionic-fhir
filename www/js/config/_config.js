@@ -8,7 +8,7 @@ var Config = (function(){
     storage: true, // should save data to browser storage
     storagePrefix: 'app-', // prefix all stoarge entries with this prefix
     emailSupport: 'exemple@mail.com',
-    backendUrl: 'data', // 'http://myserver.com/api/v1',
+    backendUrl: 'https://open-ic.epic.com/FHIR/api/FHIR/DSTU2', // 'http://myserver.com/api/v1',
     parse: {
       applicationId: '',
       restApiKey: ''

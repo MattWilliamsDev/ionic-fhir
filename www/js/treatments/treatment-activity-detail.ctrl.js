@@ -1,10 +1,11 @@
 (function(){
   'use strict';
   angular.module('app')
-    .controller('TreatmentCtrl', TreatmentCtrl);
+    .controller('TreatmentActivityCtrl', TreatmentActivityCtrl);
 
-  function TreatmentCtrl($state, $stateParams, $scope, $window, TreatmentSrv){
+  function TreatmentActivityCtrl($state, $stateParams, $scope, $window, TreatmentSrv){
     var treatmentId = $stateParams.treatmentId;
+    var activityId = $stateParams.activityId;
     var vm = {};
     $scope.vm = vm;
 
@@ -13,8 +14,8 @@
 
     function activate(){
       TreatmentSrv.get(treatmentId).then(function(treatment){
-        if(treatment){
-          vm.treatment = treatment;
+        if(treatment && treatment.activity.length > activityId){
+          vm.activity = treatment.activity[activityId];
         } else {
           $state.go('app.tabs.treatments');
         }
