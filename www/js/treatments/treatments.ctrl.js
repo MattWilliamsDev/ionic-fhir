@@ -27,9 +27,7 @@
     activate();
 
     function activate(){
-      TreatmentSrv.getAll().then(function(treatments){
-        vm.treatments = treatments;
-      });
+      refresh()
 
       $ionicPopover.fromTemplateUrl('js/twitts/partials/twitts-options-popover.html', {
         scope: $scope
@@ -55,8 +53,8 @@
       $window.alert('Share twitt: ' + twitt.content);
     }
     function refresh(){
-      TwittSrv.getAll().then(function(twitts){
-        vm.twitts = twitts;
+      TreatmentSrv.getAll().then(function(treatments){
+        vm.treatments = treatments;
         $scope.$broadcast('scroll.refreshComplete');
       });
     }

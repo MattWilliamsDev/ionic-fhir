@@ -28,7 +28,7 @@
 
     function get(id){
       return getAll().then(function(treatments){
-        return _.find(treatments, {id: id});
+        return _.find(treatments, {patientId: id});
       });
     }
 
