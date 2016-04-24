@@ -9,7 +9,7 @@
     var vm = {};
     var now = moment();
     $scope.vm = vm;
-
+    vm.title = title;
     vm.activity = undefined;
     vm.openTimePicker = openTimePicker;
     vm.activityTracking = {
@@ -17,7 +17,23 @@
         administrationDate: now,
         administrationTime: null,
     };
+    vm.get
     activate();
+    
+    function title() {
+        if( !vm.activity ) {
+            return "";
+        }
+        switch (vm.activity.type) {
+            case 'Medication':
+                return 'Medication';
+            case 'encounter':
+                return "Provider Visit";
+            case 'procedure':
+                return "Procedure";
+        }
+        return "";
+    }
 
     function activate(){
       TreatmentSrv.get(treatmentId).then(function(treatment){

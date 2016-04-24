@@ -11,6 +11,7 @@
         vm.isListShowReorder = false;
         vm.treatments = undefined;
         vm.edit = edit;
+        vm.title = title;
         vm.share = share;
         vm.refresh = refresh;
         vm.moreOptions = moreOptions;
@@ -43,6 +44,19 @@
                 }
             });
         }
+        
+        function title(activity) {
+            switch (activity.type) {
+                case 'Medication':
+                    return 'Medication';
+                case 'encounter':
+                    return "Provider Visit";
+                case 'procedure':
+                    return "Procedure";
+            }
+            return "";
+        }
+        
 
         function edit ( treatment ) {
             $window.alert( 'Edit treatment: ' + treatment.content );

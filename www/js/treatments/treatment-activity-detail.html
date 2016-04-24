@@ -3,7 +3,7 @@
         <ion-spinner class="hcenter voffset" ng-show="!vm.activity"></ion-spinner>
         <div class="row" ng-show="vm.activity">
             <div class="col">
-                <h2>{{ vm.activity.type }}</h2>
+                <h2>{{ vm.title() }}</h2>
                 <div>{{ vm.activity.description }}</div>
                 <p ng-show="vm.activity.detail.dosage"><small>{{vm.activity.detail.dosage}}</small></p>
             </div>

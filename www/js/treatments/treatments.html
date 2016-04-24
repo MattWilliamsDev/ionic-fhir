@@ -13,8 +13,8 @@
                 show-reorder="vm.isListShowReorder"
             >
                 <ion-item class="item-icon-right" ng-repeat="( index, activity ) in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({ treatmentId: treatment.id, activityId: $index })">
-                    <h2 class="text-uppercase">
-                        {{ activity.type }}
+                    <h2 class="text-capitalize">
+                        {{ vm.title(activity) }}
                     </h2>
                     <i class="icon ion-chevron-right"></i>
                     <p>
