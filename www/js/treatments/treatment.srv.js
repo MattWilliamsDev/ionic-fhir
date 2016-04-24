@@ -56,7 +56,7 @@
                 // LOOSE MEDICATIONORDER OBJECTS
                 var looseCPs = medicationOrdersResponse.data.entry.map(function(entry){
                     var cp = {};
-                    cp.id = "";
+                    cp.id = Math.random() + "";
                     cp.patientId = "1";
                     cp.subject = "Jason Argonaut";
                     cp.activity = [];

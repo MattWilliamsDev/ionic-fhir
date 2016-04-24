@@ -17,8 +17,22 @@
                 <h3>
                     {{vm.activityTracking.administrationDate | amDateFormat:'dddd, MMMM Do YYYY'}}
                 </h3>
-                <div class="list">
+                <div class="list" ng-show="vm.activity.type == 'Medication'">
                     <ion-checkbox class="item" ng-model="vm.activityTracking.isAdministered">I took my medication</ion-checkbox>
+                    <div class="item" ng-click="vm.openTimePicker()" ng-show="vm.activityTracking.isAdministered"> At:
+                        <span style="padding-left: 20px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm a'"></span>
+                        <i class="icon ion-clock pull-right" style="font-size: 22pt !important"></i>
+                    </div>
+                </div>
+                <div class="list" ng-show="vm.activity.type == 'encounter'">
+                    <ion-checkbox class="item" ng-model="vm.activityTracking.isAdministered">I completed my visit</ion-checkbox>
+                    <div class="item" ng-click="vm.openTimePicker()" ng-show="vm.activityTracking.isAdministered"> At:
+                        <span style="padding-left: 20px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm a'"></span>
+                        <i class="icon ion-clock pull-right" style="font-size: 22pt !important"></i>
+                    </div>
+                </div>
+                <div class="list" ng-show="vm.activity.type == 'procedure'">
+                    <ion-checkbox class="item" ng-model="vm.activityTracking.isAdministered">I completed this procedure</ion-checkbox>
                     <div class="item" ng-click="vm.openTimePicker()" ng-show="vm.activityTracking.isAdministered"> At:
                         <span style="padding-left: 20px;" ng-bind="vm.activityTracking.administrationTime | amUtc | amDateFormat:'h:mm a'"></span>
                         <i class="icon ion-clock pull-right" style="font-size: 22pt !important"></i>
@@ -26,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="list card" ng-show="vm.activity">
+        <div class="list card" ng-show="vm.activity && vm.activity.type == 'Medication'">
             <div class="item item-divider item-icon-right">
                 History
                 <i class="icon ion-history"></i>
