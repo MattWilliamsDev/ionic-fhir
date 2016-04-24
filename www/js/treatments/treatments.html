@@ -7,10 +7,10 @@
   <ion-content>
     <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="vm.refresh()"></ion-refresher>-->
     <ion-list show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
-      <ion-item class="item item-button-right" ng-repeat="treatment in vm.treatments" item="treatment" ui-sref="app.tabs.treatment({treatmentId: treatment.id})" on-hold="vm.moreOptions(treatment)">
+      <ion-item class="item" ng-repeat="treatment in vm.treatments" item="treatment">
           <h1>{{treatment.careplan}}</h1>
         <ion-list type="card" show-delete="vm.isListShowDelete" show-reorder="vm.isListShowReorder">
-          <ion-item class="item item-button-right" ng-repeat="activity in treatment.activity" item="activity">
+          <ion-item class="item item-button-right" ng-repeat="activity in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({treatmentId: treatment.id, activityId: $index})">
             
             <h2 style="text-transform: capitalize">{{activity.type}}</h2>
             <h4>{{activity.name}}</h2>
