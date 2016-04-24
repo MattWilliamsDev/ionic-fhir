@@ -21,9 +21,9 @@
         return $q.when(angular.copy(cachedTreatments));
       } else {
 	    var requestOptions = {
-			headers: {
-				Accept: 'application/json'
-			}
+		  headers: {
+		    Accept: 'application/json'
+		  }
 		};
         return $http.get(Config.backendUrl+'/CarePlan?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions).then(function(res){
 		  treatmentData = res.data;
@@ -43,7 +43,6 @@
 			});
 		    return cp;
 		  });
-		  console.log(treatmentData)
           cachedTreatments = treatmentData;
           return angular.copy(cachedTreatments);
         });
