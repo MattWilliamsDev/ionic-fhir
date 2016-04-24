@@ -14,7 +14,7 @@
     return service;
 
     function login(credentials){
-      return $http.get(Config.backendUrl+'/login', {
+      return $http.get('data'+'/login', {
         login: credentials.login,
         password: credentials.password
       }).then(function(res){
@@ -27,7 +27,7 @@
     }
 
     function logout(){
-      return $http.get(Config.backendUrl+'/logout').then(function(){
+      return $http.get('data'+'/logout').then(function(){
         return UserSrv.get().then(function(user){
           user.logged = false;
           return UserSrv.set(user);
