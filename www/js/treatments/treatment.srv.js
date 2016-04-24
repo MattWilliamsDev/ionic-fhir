@@ -35,14 +35,13 @@
 		    cp.activity = entry.resource.activity;
 		    cp.activity.map(function(activity){
 			  activity.type = activity.detail.category.text;
-			  if (activity.detail.code){
-			    activity.name = activity.detail.code.text;
-			  }
 			  var a = moment(new Date(activity.detail.scheduledPeriod.start));
 			  var b = moment(new Date(activity.detail.scheduledPeriod.end));
 			  var duration = b.diff(a, 'minutes');
 			  if (duration > 0) {
 			    activity.description = 'Duration: ' + duration + ' minutes';
+			  } else {
+			    activity.description = activity.detail.code.text;
 			  }
 			  return activity;
 			});
