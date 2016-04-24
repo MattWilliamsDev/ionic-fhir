@@ -49,7 +49,7 @@
                     vm.activityTracking.administrationTime = moment(val*1000);
                 }
             },
-            inputTime: moment().diff(now.clone().startOf('day'), 'seconds') - 3600,   //Optional
+            inputTime: moment().diff(now.clone().startOf('day'), 'seconds'),   //Optional
             format: 12,         //Optional
             step: 1,           //Optional
             setLabel: 'Set'    //Optional
