@@ -20,13 +20,15 @@
         vm.listHideAll = listHideAll;
         vm.listDelete = listDelete;
         vm.listReorder = listReorder;
+
         var ui = {};
         activate();
 
         function activate () {
-            refresh()
+            // refresh()
             TreatmentSrv.getAll().then( function ( treatments ) {
                 vm.treatments = treatments;
+                console.log( 'vm - after fetch', vm );
             });
 
             $ionicPopover.fromTemplateUrl( 'js/treatments/partials/treatments-options-popover.html', {
