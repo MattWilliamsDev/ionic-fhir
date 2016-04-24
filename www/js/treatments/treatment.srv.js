@@ -6,7 +6,7 @@
   // This is a dummy service to use in demo...
   TreatmentSrv.$inject = ['$http', '$q', '$timeout', 'Utils', 'Config', '_'];
   function TreatmentSrv($http, $q, $timeout, Utils, Config, _){
-    var treatmentData = undefined;
+    var medData = undefined;
     var cachedTreatments = undefined;
     var service = {
       getAll: getAll,
@@ -25,29 +25,25 @@
 		    Accept: 'application/json'
 		  }
 		};
-        return $http.get(Config.backendUrl+'/CarePlan?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions).then(function(res){
-		  treatmentData = res.data;
-		  treatmentData = treatmentData.entry.map(function(entry){
-		    var cp = {};
-		    cp.id = entry.resource.id;
-		    cp.patientId = "1";
-		    cp.subject = entry.resource.subject.display;
-		    cp.activity = entry.resource.activity;
-		    cp.activity.map(function(activity){
-			  activity.type = activity.detail.category.text;
-			  var a = moment(new Date(activity.detail.scheduledPeriod.start));
-			  var b = moment(new Date(activity.detail.scheduledPeriod.end));
-			  var duration = b.diff(a, 'minutes');
-			  if (duration > 0) {
-			    activity.description = 'Duration: ' + duration + ' minutes';
-			  } else {
-			    activity.description = activity.detail.code.text;
-			  }
-			  return activity;
-			});
-		    return cp;
+        return $http.get(Config.backendUrl+'/MedicationOrder?patient=Tbt3KuCY0B5PSrJvCu2j-PlK.aiHsu2xUjUM8bWpetXoB', requestOptions).then(function(res){
+		  medData = res.data;
+		  var tp = {};
+		  tp.id = "1";
+		  tp.patientId = "1";
+		  tp.subject = "Diabetes"
+		  medData = treatmentData.entry.map(function(entry){
+			var order = {};
+		    order.dateWritten = entry.resource.dateWritten;
+		    order.status = entry.resource.status;
+		    order.patient = entry.resource.patient.display;
+		    order.prescriber = entry.resource.patient.display;
+		    order.medication = entry.resource.medicationReference.display;
+		    order.dispenseRequest = entry.resource.dispenseRequest;
+		    order.dosageInstruction = entry.resource.dosageInstruction;
+		    order.substition = "t"//entry.resource.substition.type.coding.code === 'N' ? true : false;
 		  });
-          cachedTreatments = treatmentData;
+		  tp.medications = medData;
+          cachedTreatments = tp;
           return angular.copy(cachedTreatments);
         });
       }
