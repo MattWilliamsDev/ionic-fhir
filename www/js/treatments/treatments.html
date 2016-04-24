@@ -13,8 +13,8 @@
                     {{ treatment.subject || 'My Careplan' }}
                 </h1>
                 
-                <ion-list class="card" ui-sref="app.tabs.treatments.details({ treatmentId: treatment.id })">
-                    <ion-item class="item-button-right" ng-repeat="( index, activity ) in treatment.activity" item="activity">
+                <ion-list class="card">
+                    <ion-item class="item-button-right" ng-repeat="( index, activity ) in treatment.activity" item="activity" ui-sref="app.tabs.treatment-activity({ treatmentId: treatment.id, activityId: $index })">
                         <h2 class="text-uppercase">
                             {{ activity.type }}
                         </h2>
